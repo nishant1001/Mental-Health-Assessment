@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assessment</title>
+    <style>
+        body {
+            font-family: Gothic;
+            color: white; /* White text */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            background: linear-gradient(90deg, white, #89cff0, white);
+            background-size: 400% 400%;
+            animation: gradient 6s infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h2 {
+            color: #000080; /* Blue heading */
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 0px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0px;
+            font-size: 18px;
+            color: white; /* White label text */
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #000080; /* Blue border */
+            border-radius: 30px;
+            color: #000080;
+            background-color: white; /* White background for select */
+        }
+
+        option[value=""] {
+            color: #000080; /* Blue text for "Choose..." option */
+        }
+
+        input[type="submit"] {
+            background-color: white; /* White button */
+            color: #000080; /* Blue text */
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #000080;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e6f3f8; /* Grey on hover */
+        }
+
+	h2{
+            color: #000080;
+            margin-bottom: 20px;
+	}
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+CJK:wght@400;700&display=swap">
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            var mentalHealthChoice = document.getElementById('mental_health_choice').value;
+
+            switch (mentalHealthChoice) {
+                case "1":
+                    window.location.href = "Depression.html";
+                    break;
+                case "2":
+                    window.location.href = "Stress.html";
+                    break;
+                case "3":
+                    window.location.href = "Anxiety.html";
+                    break;
+                case "4":
+                    window.location.href = "Schizophrenia.html";
+                    break;
+                case "5":
+                    window.location.href = "OCD.html";
+                    break;
+                case "6":
+                    window.location.href = "BEDC.html";
+                    break;
+                default:
+                    alert("Please select a valid option.");
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Choose your POISON</h2>
+    <form onsubmit="handleSubmit(event)">
+        <label for="mental_health_choice">
+            <select id="mental_health_choice" name="mental_health_choice">
+                <option value="" style="color: #000080;">Choose...</option>
+                <option value="1">Depression</option>
+                <option value="2">Stress</option>
+                <option value="3">Anxiety</option>
+                <option value="4">Schizophrenia</option>
+                <option value="5">Obsessive-compulsive disorder (OCD)</option>
+                <option value="6">Behavioural and Emotional Disorder in children (BEDC)</option>
+            </select>
+        </label>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress</title>
+    <style>
+                body {
+            font-family: 'Noto Sans CJK', 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            background: linear-gradient(90deg, white, #89cff0, white);
+            background-size: 400% 400%;
+            animation: gradient 6s infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h2 {
+            color: #000080;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: white;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #000080;
+            border-radius: 30px;
+            color: #000080;
+            background-color: white;
+        }
+
+        option[value=""] {
+            color: #000080;
+        }
+
+        input[type="aaa"] {
+            background-color: white;
+            color: #000080;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #000080;
+            border-radius: 20px;
+            cursor: pointer;
+	    margin-right: 10px;
+            width: 30px; /* Adjusted width */
+	    text-align: center;
+        }
+
+        input[type="aaa"]:hover {
+            background-color: #e6f3f8;
+        }
+
+        #checkResultsBtn {
+            background-color: white;
+            color: #000080;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #000080;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #checkResultsBtn:hover {
+            background-color: #e6f3f8;
+        }
+
+	#resultContainer {
+	    color: #000080;
+	    font-size: 50px;
+	}
+
+    </style>
+</head>
+<body>
+
+<div id="movingNote">
+    <span id="movingText"></span>
+</div>
+
+<div id="contentContainer">
+    <form id="stressForm">
+        <!-- Question 1 -->
+        <div class="question" id="question1">
+            <label><h2>Persistent feeling of sadness</h2>
+                <input type="aaa" name="stressSymptom1" value="Yes" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom1" value="No" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question" id="question2" style="display: none;">
+            <label><h2>Aches and pains</h2>
+                <input type="aaa" name="stressSymptom2" value="Yes" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom2" value="No" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question" id="question3" style="display: none;">
+            <label><h2>Trouble sleeping</h2>
+                <input type="aaa" name="stressSymptom3" value="Yes" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom3" value="No" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question" id="question4" style="display: none;">
+            <label><h2>High-Blood pressure</h2>
+                <input type="aaa" name="stressSymptom4" value="Yes" id="yes4" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom4" value="No" id="no4" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question" id="question5" style="display: none;">
+            <label><h2>Stomach or digestive problems</h2>
+                <input type="aaa" name="stressSymptom5" value="Yes" id="yes5" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom5" value="No" id="no5" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question" id="question6" style="display: none;">
+            <label><h2>Muscle tension</h2>
+                <input type="aaa" name="stressSymptom6" value="Yes" id="yes6" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom6" value="No" id="no6" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question" id="question7" style="display: none;">
+            <label><h2>Headaches, dizziness, or shaking</h2>
+                <input type="aaa" name="stressSymptom7" value="Yes" id="yes7" onclick="checkNextQuestion('Yes')">
+                <input type="aaa" name="stressSymptom7" value="No" id="no7" onclick="checkNextQuestion('No')">
+            </label>
+        </div>
+
+        <!-- Check Results button -->
+	<button type="button" id="checkResultsBtn" onclick="checkResults()" style="display: none;">Check Results</button>
+ 	
+	<div id="resultContainer" style="display: none;"></div>
+
+    </form>
+</div>
+
+<script>
+    var currentQuestion = 1;  // Track the current question
+    var yesCount = 0;  // Track the number of "Yes" answers
+
+    function checkNextQuestion(answer) {
+        if (answer === 'Yes') {
+            yesCount++;
+        }
+
+        currentQuestion++;
+        hideCurrentQuestion();
+        if (currentQuestion <= 7) {
+            showNextQuestion(currentQuestion);
+        } else {
+            showCheckResultsButton();
+        }
+    }
+
+    function checkResults() {
+        var totalQuestions = 7;
+        var percentageYes = (yesCount / totalQuestions) * 100;
+        
+        var resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = "You have " + percentageYes.toFixed(2) + "%" + " stress";
+        
+        // Hide the "Check Results" button
+        var checkResultsBtn = document.getElementById('checkResultsBtn');
+        checkResultsBtn.style.display = 'none';
+
+        // Display the result container
+        resultContainer.style.display = 'block';
+
+    }
+
+    function hideCurrentQuestion() {
+        var currentQuestionDiv = document.getElementById('question' + (currentQuestion - 1));
+        currentQuestionDiv.style.display = 'none';
+    }
+
+    function showNextQuestion(nextQuestion) {
+        var nextQuestionDiv = document.getElementById('question' + nextQuestion);
+        nextQuestionDiv.style.display = 'block';
+    }
+
+    function showCheckResultsButton() {
+        var checkResultsBtn = document.getElementById('checkResultsBtn');
+        checkResultsBtn.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
+
